@@ -1,7 +1,7 @@
 ---
 title: '홈페이지'
 date: 2022-07-27 00:00:00
-featured_image: 
+featured_image: '/images/spring-logo.png'
 excerpt: WAS, 미들웨어, DBMS
 ---
 
