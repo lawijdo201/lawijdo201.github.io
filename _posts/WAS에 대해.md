@@ -1,7 +1,7 @@
 ---
 title: 'WAS'
 date: 2022-07-14
-featured_image:
+featured_image: '/images/demo/demo-square.jpg'
 excerpt: WAS, 미들웨어, DBMS
 category: cs
 ---
