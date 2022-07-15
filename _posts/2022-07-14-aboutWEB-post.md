@@ -14,7 +14,7 @@ excerpt: Web에 대해
   * [장애 극복기능](#장애-극복기능)
 - [Scope](#scope)
 
-===
+
 
 ## DBMS(database management system)
 
