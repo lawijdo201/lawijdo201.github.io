@@ -4,14 +4,29 @@ date: 2022-07-14 00:00:00
 excerpt: Web에 대해
 ---
 
+## 목차
+
+- [DBMS(database management system)](#dbms-database-management-system-)
+- [미들웨어(MiddleWare)](#미들웨어-middleware-)
+- [WAS(Web Applicatoin Server)](#was-web-applicatoin-server-)
+  * [WAS의 주요기능](#was의-주요기능)
+  * [웹서버 vs WAS](#웹서버-vs-was)
+  * [장애 극복기능](#장애-극복기능)
+- [Scope](#scope)
+
+===
 
 ## DBMS(database management system)
 
 다수의 사용자들이 데이터베이스 내의 데이터를 접근할 수 있도록 해주는 소프트웨어를 말합니다. [ex)MySQL, Oracle, MariaDB...]
 
+---
+
 ## 미들웨어(MiddleWare)
 
 비즈니스 로직을 클라이언트와 DBMS사이의 미들웨어 서버에서 동작하도록 함으로써 클라이언트는 입력과 출력만 담당하도록 합니다. 이로써 프로그램 로직이 변경이 되더라도 클라이언트 수정없이 중앙의 미들웨어만 변경하면 되는 장점을 가지게 됩니다.
+
+---
 
 ## WAS(Web Applicatoin Server)
 
@@ -32,6 +47,8 @@ WAS는 일종의 미들웨어로 웹 클라이언트의 요청 중 보통 웹 �
 ### 장애 극복기능
 
 웹 서버가 WAS 앞단에 배치되어 있을때, WAS에 문제가 발생해 WAS를 재시작해야 하는 경우 앞단의 웹 서버에서 먼저 해당 WAS를 이용하지 못하도록 하고 WAS를 재시작한다면 해당 웹 애플리케이션을 사용하는 사람은 WAS의 문제가 발생하였는지를 모르고 이용할 수 있습니다. 이러한 처리를 장애 극복 기능이라고 하는데 이는 대용량 웹 애플리케이션에는 무중단으로 운영하기 위해서 상당히 중요한 기능이다.
+
+---
 
 ## Scope
 
