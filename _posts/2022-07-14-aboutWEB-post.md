@@ -1,6 +1,7 @@
 ---
 title: 'Web'
 date: 2022-07-14 00:00:00
+featured_image: '/images/demo/demo-square.jpg'
 excerpt: Web에 대해
 ---
 
