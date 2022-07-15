@@ -1,7 +1,7 @@
 ---
 title: 'Sping JAVA'
 date: 2022-07-15 00:00:00
-featured_image: '/images/demo/demo-square.jpg'
+featured_image: 
 excerpt: Sprin JAVA에 대해
 ---
 
