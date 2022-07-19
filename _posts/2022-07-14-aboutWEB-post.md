@@ -20,7 +20,7 @@ excerpt: Web에 대해
 
 ## DBMS(database management system)
 
-다수의 사용자들이 데이터베이스 내의 데이터를 접근할 수 있도록 해주는 소프트웨어를 말합니다. [ex)MySQL, Oracle, MariaDB...]
+[다수의 사용자들이 데이터베이스 내의 데이터를 접근할 수 있도록 해주는 소프트웨어를 말합니다. [ex)MySQL, Oracle, MariaDB...]](/QWEQW/2022-07-22-aboutWW-post.md)
 
 ---
 
