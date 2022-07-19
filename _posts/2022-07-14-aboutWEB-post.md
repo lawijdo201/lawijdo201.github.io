@@ -73,5 +73,5 @@ WAS는 일종의 미들웨어로 웹 클라이언트의 요청 중 보통 웹 �
 
 
 
-출처: https://www.boostcourse.org/web326/lecture
-출처: https://javaee.github.io/javaee-spec/javadocs/
+* 출처: https://www.boostcourse.org/web326/lecture
+* 출처: https://javaee.github.io/javaee-spec/javadocs/
