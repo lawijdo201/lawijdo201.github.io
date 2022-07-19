@@ -14,6 +14,7 @@ excerpt: Web에 대해
   * [웹서버 vs WAS](#웹서버-vs-was)
   * [장애 극복기능](#장애-극복기능)
 - [Scope](#scope)
+- [HttpServleteRequest, HrrpServletResponse](#HttpServleteRequest--HrrpServletResponse)
 
 
 
@@ -60,10 +61,12 @@ WAS는 일종의 미들웨어로 웹 클라이언트의 요청 중 보통 웹 �
 * Request : 하나의 요청이 들어와서 응답이 나갈 떄까지 유지된다.. http요청을 WAS가 받아서 웹 브라우저에게 응답할 때까지 변수가 유지되는 경우 사용합니다.
 * Page : 페이지 내에서 지역변수처럼 사용. jsp에서 pageScope에 값을 저장 한 후 해당 값을 EL표기법등에서 사용할 때 사용됩니다.
 
+## HttpServleteRequest, HrrpServletResponse
 
+### HttpServleteRequest의 메소드
 
-
-
+* String getPathInfo : 클라이언트가 이 요청을 할 때 보낸 URL과 관련된 추가 경로 정보를 반환합니다. 추가 경로 정보는 서블릿 경로를 따르지만 쿼리 문자열 앞에 있으며 "/" 문자로 시작합니다. 이 메서드는 추가 경로 정보가 없으면 null을 반환합니다.
+*  String getRequestURI() : 프로토콜 이름에서 HTTP 요청의 첫 번째 줄에 있는 쿼리 문자열까지 이 요청의 URL 부분을 반환합니다.
 
 
 
@@ -71,3 +74,4 @@ WAS는 일종의 미들웨어로 웹 클라이언트의 요청 중 보통 웹 �
 
 
 출처: https://www.boostcourse.org/web326/lecture
+출처: https://javaee.github.io/javaee-spec/javadocs/
