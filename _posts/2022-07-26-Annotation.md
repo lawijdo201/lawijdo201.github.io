@@ -34,9 +34,37 @@ excerpt: Annotation에 대해
 <context:component-scan base-package="패키지명"/>              
 ```
 
-주요 어노테이션
+### 주요 어노테이션
+
 |이름|설명|
 |---|---|
 |@RequestMapping|요청에 대해 어떤 Controller, 어떤 메소드가 처리할지를 맵핑하기 위한 어노테이션|
+|@RequestParam|@RequestParam 어노테이션은 HttpServletRequest 객체와 같은 역할을 한다.|
 
+#### RequestParam 예제
+```java
+@Controller
+public class LoginController {    
+    //"userID"란 데이터의 이름을 가진 데이터를 String userID에 집어넣는다.
+    public ModelAndView login2(@RequestParam("userID") String userID, @RequestParam("userName") String userName) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("result");
+		
+    // getParameter() 메서드를 이용할 필요가 없습니다.
+		// String userID = request.getParameter("userID");
+		// String userName = request.getParameter("userName");
+		
+		System.out.println("userID: "+userID);
+		System.out.println("userName: "+userName);
+		mav.addObject("userID", userID);
+		mav.addObject("userName", userName);
+
+		return mav;
+	}
+}
+```
+```java
+@RequestParam("가져올 데이터의 이름") [데이터타입] [가져온데이터를 담을 변수]
+```
 
