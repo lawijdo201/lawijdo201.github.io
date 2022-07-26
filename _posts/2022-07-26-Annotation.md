@@ -34,13 +34,14 @@ excerpt: Annotation에 대해
 <context:component-scan base-package="패키지명"/>              
 ```
 
-## 주요 어노테이션
+## Parameter 관련 어노테이션
 
 |이름|설명|
 |---|---|
 |@RequestMapping|요청에 대해 어떤 Controller, 어떤 메소드가 처리할지를 맵핑하기 위한 어노테이션|
 |@RequestParam|@RequestParam 어노테이션은 HttpServletRequest 객체와 같은 역할을 한다.|
 |@ModelAttribute|@ModelAttribute 어노테이션은 @RequestParam과 달리 객체를 매핑해준다.|
+
 
 #### RequestParam
 
@@ -99,9 +100,11 @@ public ModelAndView login3(@RequestParam Map<String, String> info) throws Except
 	return mav;
 }
 ```
+
 ```java
 RequestParam Map<String, String> info
 ```
+
 @RequestParam을  Map에 전송된 매개변수의 이름을 key, 값을 value로 지정합니다.
 
 
@@ -114,7 +117,20 @@ public ModelAndView login4(@ModelAttribute("info") LoginVO loginVO) throws Excep
 	mav.setViewName("result");
 	return mav;
 ```
+
 ```java
 @ModelAttribute("info") LoginVO loginVO
 ```
-@ModelAttribute("info") LoginVO loginVO는 전달도니 매개변수에 대해 loginVO 클래스 객체를 생성합니다. 이어서 매개변수 이름과 같은 속성에 매개변수 값을 설정한 후 info 이름으로 바인딩합니다. 이는 addObject()를 이용할 필요 없이 info를 이용해 바로 JSP에서 LoginVO속성에 접근할 수 있습니다. 예를 들어 로그인창에서 전달된 매개변수 이름이 userID이고, 값이 hong일 경우, @ModelAttribute로 LoginVO를 지정하면 전달 시 LoginVO의 속성 userID에 전달된 값 hong을 자동으로 설정해 줍니다.
+
+@ModelAttribute("info") LoginVO loginVO는 전달된 매개변수에 대해 loginVO 클래스 객체를 생성합니다. 이어서 매개변수 이름과 같은 속성에 매개변수 값을 설정한 후 info 이름으로 바인딩합니다. 이는 addObject()를 이용할 필요 없이 info를 이용해 바로 JSP에서 LoginVO속성에 접근할 수 있습니다. 예를 들어 로그인창에서 전달된 매개변수 이름이 userID이고, 값이 hong일 경우, @ModelAttribute로 LoginVO를 지정하면 전달 시 LoginVO의 속성 userID에 전달된 값 hong을 자동으로 설정해 줍니다.
+
+```jsp
+${info.userID}
+```
+## @Autowired 이용해 빈 주입하기
+
+XML에서 빈을 설정한 후 애플리케이션이 실행될 때 빈을 주입해서 사용하면 XML 파일이 복잡해지면서 사용 및 관리가 불편합니다. 이를 해결하기 위해 @AutoWired가 등장했습니다.
+
+#### Autowired의 특징
+* 기존 XML 파일에서 각각의 빈을 DI로 주입했던 기능을 코드에서 애너테이션으로 자동으로 수행합니다.
+* @Autowired를 사용하면 별도의 setter나 생성자 없이 속성에 빈을 주입할 수 있습니다.
