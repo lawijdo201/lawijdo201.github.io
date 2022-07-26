@@ -77,3 +77,26 @@ public class LoginController {
 ```java
 @RequestParam(value="userName", required=false) String userName
 ```
+
+#### RequestParam을 이용해 Map에 매개변수 값 설정하기
+* 전송되는 매개변수의 수가 많을 경우 Map에 바로 저장해서 사용하면 편리
+
+```java
+public ModelAndView login3(@RequestParam Map<String, String> info) throws Exception {
+	request.setCharacterEncoding("utf-8");
+	ModelAndView mav = new ModelAndView();
+		
+	String userID = info.get("userID");
+	String userName = info.get("userName");
+	System.out.println("userID: "+userID);
+	System.out.println("userName: "+userName);
+	
+	mav.addObject("info", info);
+	mav.setViewName("result");
+	return mav;
+}
+```
+```java
+RequestParam Map<String, String> info
+```
+@RequestParam을  Map에 전송된 매개변수의 이름을 key, 값을 value로 지정합니다.
