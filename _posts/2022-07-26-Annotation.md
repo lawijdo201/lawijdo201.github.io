@@ -40,6 +40,7 @@ excerpt: Annotation에 대해
 |---|---|
 |@RequestMapping|요청에 대해 어떤 Controller, 어떤 메소드가 처리할지를 맵핑하기 위한 어노테이션|
 |@RequestParam|@RequestParam 어노테이션은 HttpServletRequest 객체와 같은 역할을 한다.|
+|@ModelAttribute|@ModelAttribute 어노테이션은 @RequestParam과 달리 객체를 매핑해준다.|
 
 #### RequestParam
 
@@ -85,13 +86,15 @@ public class LoginController {
 public ModelAndView login3(@RequestParam Map<String, String> info) throws Exception {
 	request.setCharacterEncoding("utf-8");
 	ModelAndView mav = new ModelAndView();
-		
+	
+	//Map에 저장된 매개 변수의 이름으로 전달된 값을 가져옵니다.
 	String userID = info.get("userID");
 	String userName = info.get("userName");
+	
 	System.out.println("userID: "+userID);
 	System.out.println("userName: "+userName);
 	
-	mav.addObject("info", info);
+	mav.addObject("info", info);	//@RequestParam에서 설정한 Map 이름으로 바인딩합니다.
 	mav.setViewName("result");
 	return mav;
 }
@@ -100,3 +103,18 @@ public ModelAndView login3(@RequestParam Map<String, String> info) throws Except
 RequestParam Map<String, String> info
 ```
 @RequestParam을  Map에 전송된 매개변수의 이름을 key, 값을 value로 지정합니다.
+
+
+```java
+public ModelAndView login4(@ModelAttribute("info") LoginVO loginVO) throws Exception {
+	request.setCharacterEncoding("utf-8");
+	ModelAndView mav = new ModelAndView();
+	System.out.println("userID: "+loginVO.getUserID());
+	System.out.println("userName: "+loginVO.getUserName());
+	mav.setViewName("result");
+	return mav;
+```
+```java
+@ModelAttribute("info") LoginVO loginVO
+```
+@ModelAttribute("info") LoginVO loginVO는 전달도니 매개변수에 대해 loginVO 클래스 객체를 생성합니다. 이어서 매개변수 이름과 같은 속성에 매개변수 값을 설정한 후 info 이름으로 바인딩합니다. 이는 addObject()를 이용할 필요 없이 info를 이용해 바로 JSP에서 LoginVO속성에 접근할 수 있습니다. 예를 들어 로그인창에서 전달된 매개변수 이름이 userID이고, 값이 hong일 경우, @ModelAttribute로 LoginVO를 지정하면 전달 시 LoginVO의 속성 userID에 전달된 값 hong을 자동으로 설정해 줍니다.
