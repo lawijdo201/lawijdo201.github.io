@@ -122,7 +122,9 @@ public ModelAndView login4(@ModelAttribute("info") LoginVO loginVO) throws Excep
 @ModelAttribute("info") LoginVO loginVO
 ```
 
-@ModelAttribute("info") LoginVO loginVO는 전달된 매개변수에 대해 loginVO 클래스 객체를 생성합니다. 이어서 매개변수 이름과 같은 속성에 매개변수 값을 설정한 후 info 이름으로 바인딩합니다. 이는 addObject()를 이용할 필요 없이 info를 이용해 바로 JSP에서 LoginVO속성에 접근할 수 있습니다. 예를 들어 로그인창에서 전달된 매개변수 이름이 userID이고, 값이 hong일 경우, @ModelAttribute로 LoginVO를 지정하면 전달 시 LoginVO의 속성 userID에 전달된 값 hong을 자동으로 설정해 줍니다.
+@ModelAttribute("info") LoginVO loginVO는 전달된 매개변수에 대해 loginVO 클래스 객체를 생성합니다. 이어서 매개변수 이름과 같은 속성에 매개변수 값을 설정한 후 info 이름으로 바인딩합니다. 이는 addObject()를 이용할 필요 없이 info를 이용해 바로 JSP에서 LoginVO속성에 접근할 수 있습니다.
+
+ 예를 들어 로그인창에서 전달된 매개변수 이름이 userID이고, 값이 hong일 경우, @ModelAttribute로 LoginVO를 지정하면 전달 시 LoginVO의 속성 userID에 전달된 값 hong을 자동으로 설정해 줍니다.
 
 ```jsp
 ${info.userID}
