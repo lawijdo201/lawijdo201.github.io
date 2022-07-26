@@ -26,7 +26,10 @@ excerpt: Annotation에 대해
 
 스프링에서 애너테이션을 사용하려면 먼저 스프링에서 제공하는 애너테이션 관련 클래스를 XML 설정 파일에서 빈으로 설정해야 합니다.
 ```xml
-<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>  <!-- 클래스 레벨에 @RequestMapping을 처리합니다. -->
-<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>   <!-- 메서드 레벨에 @RequestMapping을 처리합니다. -->
-<context:component-scan base-package="패키지명"/>                   <!-- 적용한 패키지에 존재하는 클래스에 애너테이션이 적용되도록 설정합니다. -->
+<!-- 클래스 레벨에 @RequestMapping을 처리합니다. -->
+<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+<!-- 메서드 레벨에 @RequestMapping을 처리합니다. -->
+<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+<!-- 적용한 패키지에 존재하는 클래스에 애너테이션이 적용되도록 설정합니다. -->
+<context:component-scan base-package="패키지명"/>              
 ```
