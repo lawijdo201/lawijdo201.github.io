@@ -75,5 +75,5 @@ public class LoginController {
 * required 속성을 false로 설정하면 메서드 호출 시 지정한 이름의 매개변수가 전달되면 값을 저장하고 없으면 null을 할당함
 
 ```java
-@RequestParam(value="userName", required=flase) String userName
+@RequestParam(value="userName", required=false) String userName
 ```
