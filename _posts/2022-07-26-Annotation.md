@@ -34,14 +34,15 @@ excerpt: Annotation에 대해
 <context:component-scan base-package="패키지명"/>              
 ```
 
-### 주요 어노테이션
+## 주요 어노테이션
 
 |이름|설명|
 |---|---|
 |@RequestMapping|요청에 대해 어떤 Controller, 어떤 메소드가 처리할지를 맵핑하기 위한 어노테이션|
 |@RequestParam|@RequestParam 어노테이션은 HttpServletRequest 객체와 같은 역할을 한다.|
 
-#### RequestParam 예제
+#### RequestParam
+
 ```java
 @Controller
 public class LoginController {    
@@ -51,7 +52,7 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("result");
 		
-    // getParameter() 메서드를 이용할 필요가 없습니다.
+   		// getParameter() 메서드를 이용할 필요가 없습니다.
 		// String userID = request.getParameter("userID");
 		// String userName = request.getParameter("userName");
 		
@@ -68,3 +69,11 @@ public class LoginController {
 @RequestParam("가져올 데이터의 이름") [데이터타입] [가져온데이터를 담을 변수]
 ```
 
+#### RequestParam의 required 속성
+* @RequestParam 적용 시 required 속성을 생략하면 기본값은 true임
+* required 속성을 true로 설정하면 메서드 호출 시 반드시 지정한 이름의 매개변수를 전달해야함(매개변수가 없으면 예외가 발생)
+* required 속성을 false로 설정하면 메서드 호출 시 지정한 이름의 매개변수가 전달되면 값을 저장하고 없으면 null을 할당함
+
+```java
+@RequestParam(value="userName", required=true) String userName
+```
