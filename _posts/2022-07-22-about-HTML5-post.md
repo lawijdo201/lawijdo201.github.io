@@ -28,7 +28,7 @@ HTML5를 이용한 화면 레이아웃
 ---------------------
     
 ```html
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -112,3 +112,4 @@ HTML5를 이용한 화면 레이아웃
 </body>
 </html>
 ```
+![](/images/Spring_Framework/HTML5_result.jpg)
