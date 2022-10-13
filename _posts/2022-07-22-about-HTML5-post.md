@@ -20,4 +20,4 @@ HTML5에 추가된 여러 가지 태그
 HTML5를 이용한 화면 레이아웃
 ---------------------------------
              
-![](/images/Spring_Framework/Spring_Framework.jpg)
+![](/images/Spring_Framework/HTML5_layout.jpg)
