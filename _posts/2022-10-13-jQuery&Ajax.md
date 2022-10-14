@@ -1,5 +1,5 @@
 ---
-title: 'jQuery'
+title: 'jQuery&Ajax'
 date: 2022-10-13 00:00:00
 featured_image: 
 excerpt: jQuery, Ajax
@@ -191,5 +191,92 @@ public class AjaxTest1 extends HttpServlet {
 		PrintWriter writer = response.getWriter();
 		writer.print("안녕하세요. 서버입니다.");
 	}
+}
+```
+Ajax 이용해 서버와 JSON 데이터 주고받기
+==============================
+
+### 1. 웹 브라우저에서 서버로 JSON 형식의 정보 전달하기
+
+```java
+private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	request.setCharacterEncoding("utf-8");
+	response.setContentType("text/html; charset=utf-8");
+	String jsonInfo = request.getParameter("jsonInfo");						//문자열로 전송된 JSON 데이터를 getParameter()를 이용해 가져옵니다.
+	try {
+		JSONParser jsonParser = new JSONParser();							//JSON 데이터를 처리하기 위해 JSONParser 객체를 생성합니다.
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInfo);	//전송된 JSON 데이터를 파싱합니다.
+		System.out.println("* 회원 정보 *");
+		System.out.println(jsonObject.get("name"));							//JSON데이터의 name 속성들을 get()에 전달하여 value를 출력합니다.
+		System.out.println(jsonObject.get("age"));
+		System.out.println(jsonObject.get("gender"));
+		System.out.println(jsonObject.get("nickname"));
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+```
+
+```json
+ <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
+ <script>
+    $(function() {
+        $("#checkJson").click(function() {
+    	   var _jsonInfo ='{"name":"박지성","age":"25","gender":"남자","nickname":"날센돌이"}';
+    	   $.ajax({
+             type:"post",
+             async:false, 
+             url:"${contextPath}/json",
+             data : {jsonInfo: _jsonInfo},			<!--메게변수 이름 jsoninfo로 JSON 데이터를 ajax로 전송합니다.-->
+             success:function (data,textStatus){
+	     },
+	     error:function(data,textStatus){
+	        alert("에러가 발생했습니다.");ㅣ
+	     },
+	     complete:function(data,textStatus){
+	     }
+	   });  //end ajax	
+
+       });
+    });
+ </script>
+ ```
+ 
+### 2. 서버에서 웹 브라우저로 JSON 형식의 정보 전달하기
+
+* JSON 배열에 정보를 저장하는 과정
+	1. memberInfo로 JSONObject 객체를 생성한 후 회원 정보를 name/value쌍으로 저장
+	2. membersArray의 JSONArray 객체를 생성한 후 회원 정보를 저장한 JSON 객체를 차례대로 저장
+	3. membersArray배열에 회원 정보를 저장한 후 totalObject로 JSONObject 객체를 생성하여 name에는 자바스크립트에서 접근할 때 사용하는 이름인 members를, value에는 membersArray를 최종적으로 저장
+
+```java
+private void doHandle(HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException {
+	request.setCharacterEncoding("utf-8");
+	response.setContentType("text/html; charset=utf-8");
+	PrintWriter writer = response.getWriter();
+
+	JSONObject totalObject = new JSONObject();
+	JSONArray membersArray = new JSONArray();
+	JSONObject memberInfo = new JSONObject();
+
+	memberInfo.put("name", "박지성");
+	memberInfo.put("age", "25");
+	memberInfo.put("gender", "남자");
+	memberInfo.put("nickname", "날쌘돌이");
+	membersArray.add(memberInfo);
+
+	memberInfo = new JSONObject();
+	memberInfo.put("name", "김연아");
+	memberInfo.put("age", "21");
+	memberInfo.put("gender", "여자");
+	memberInfo.put("nickname", "");
+	membersArray.add(memberInfo);
+
+	totalObject.put("members", membersArray);
+
+	String jsonInfo = totalObject.toJSONString();
+	System.out.print(jsonInfo);
+	writer.print(jsonInfo);
 }
 ```
