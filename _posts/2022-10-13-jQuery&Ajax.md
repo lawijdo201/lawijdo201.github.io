@@ -217,7 +217,7 @@ private void doHandle(HttpServletRequest request, HttpServletResponse response) 
 }
 ```
 
-```json
+```javascript
  <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
  <script>
     $(function() {
