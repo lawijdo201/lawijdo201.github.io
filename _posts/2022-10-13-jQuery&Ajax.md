@@ -198,16 +198,19 @@ Ajax 이용해 서버와 JSON 데이터 주고받기
 
 ### 1. 웹 브라우저에서 서버로 JSON 형식의 정보 전달하기
 
+서버
+-------------
+
 ```java
 private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	request.setCharacterEncoding("utf-8");
 	response.setContentType("text/html; charset=utf-8");
 	String jsonInfo = request.getParameter("jsonInfo");						//문자열로 전송된 JSON 데이터를 getParameter()를 이용해 가져옵니다.
 	try {
-		JSONParser jsonParser = new JSONParser();							//JSON 데이터를 처리하기 위해 JSONParser 객체를 생성합니다.
+		JSONParser jsonParser = new JSONParser();						//JSON 데이터를 처리하기 위해 JSONParser 객체를 생성합니다.
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInfo);	//전송된 JSON 데이터를 파싱합니다.
 		System.out.println("* 회원 정보 *");
-		System.out.println(jsonObject.get("name"));							//JSON데이터의 name 속성들을 get()에 전달하여 value를 출력합니다.
+		System.out.println(jsonObject.get("name"));						//JSON데이터의 name 속성들을 get()에 전달하여 value를 출력합니다.
 		System.out.println(jsonObject.get("age"));
 		System.out.println(jsonObject.get("gender"));
 		System.out.println(jsonObject.get("nickname"));
@@ -216,6 +219,9 @@ private void doHandle(HttpServletRequest request, HttpServletResponse response) 
 	}
 }
 ```
+
+웹브라우저
+--------------
 
 ```javascript
  <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
@@ -256,11 +262,11 @@ private void doHandle(HttpServletRequest request, HttpServletResponse response)
 	response.setContentType("text/html; charset=utf-8");
 	PrintWriter writer = response.getWriter();
 
-	JSONObject totalObject = new JSONObject();
-	JSONArray membersArray = new JSONArray();
-	JSONObject memberInfo = new JSONObject();
+	JSONObject totalObject = new JSONObject();		//배열을 저장할 totalObject를 선언합니다.
+	JSONArray membersArray = new JSONArray();		//memberinfo JSON 객체를 저장할 membersArray 배열을 선언합니다.
+	JSONObject memberInfo = new JSONObject();		//회원 한 명의 정보가 들어갈 memberInfo JSON 객체를 선언합니다.
 
-	memberInfo.put("name", "박지성");
+	memberInfo.put("name", "박지성");				//회원 정보를 name/value쌍으로 저장합니다.
 	memberInfo.put("age", "25");
 	memberInfo.put("gender", "남자");
 	memberInfo.put("nickname", "날쌘돌이");
@@ -274,9 +280,79 @@ private void doHandle(HttpServletRequest request, HttpServletResponse response)
 	membersArray.add(memberInfo);
 
 	totalObject.put("members", membersArray);
+	
+	
+	JSONArray bookArray = new JSONArray();
+	JSONObject bookInfo = new JSONObject();
+	bookInfo.put("title", "초보자를 위한 자바 프로그래밍);
+	bookInfo.put("writer", "이병승");
+	bookInfo.put("price", "30000");
+	bookInfo.put("genre", "IT");
+	bookInfo.put("image", "http://localhost:8090/pro16/image/image1.jpg");
+	bookArray.add(bookInfo);
+
+	bookInfo = new JSONObject();
+	bookInfo.put("title", "모두의 파이썬");
+	bookInfo.put("writer", "이승찬");
+	bookInfo.put("price", "12000");
+	bookInfo.put("genre", "IT");
+	bookInfo.put("image", "http://localhost:8090/pro16/image/image2.jpg");
+	bookArray.add(bookInfo);
+
+	totaObject.put("books", bookArray);		//현제 totalObject엔 members, books 두개의 키가 있음
+		
 
 	String jsonInfo = totalObject.toJSONString();
 	System.out.print(jsonInfo);
 	writer.print(jsonInfo);
+	
+	String jsonInfo = totalObject.toJSONString();
+	System.out.print(jsonInfo);
+	writer.print(jsonInfo);					/저브라우저로 전송
 }
+```
+
+```javascript
+ <script>
+    $(function() {
+        $("#checkJson").click(function() {
+    	$.ajax({
+            type:"post",
+            async:false, 
+            url:"${contextPath}/json2",
+            success:function (data,textStatus){
+            	var jsonInfo = JSON.parse(data);
+            	var memberInfo ="회원 정보<br>";
+	        memberInfo += "=======<br>";
+			
+	        for(var i in jsonInfo.members){
+		   memberInfo += "이름: " + jsonInfo.members[i].name+"<br>";
+		   memberInfo += "나이: " + jsonInfo.members[i].age+"<br>";
+		   memberInfo += "성별: " + jsonInfo.members[i].gender+"<br>";
+		   memberInfo += "별명: " + jsonInfo.members[i].nickname+"<br><br><br>";
+	        }
+			
+		var booksInfo = "<br><br><br>도서 정보<br>";
+	    	booksInfo += "===========<br>";
+			
+	     	for(var i in jsonInfo.books) {
+				booksInfo += "제목: " + jsonInfo.books[i].title+"<br>";
+				booksInfo += "저자: " + jsonInfo.books[i].writer+"<br>";
+				booksInfo += "가격: " + jsonInfo.books[i].price+"원 <br>";
+				booksInfo += "장르: " + jsonInfo.books[i].genre+"<br>";
+           		imageURL = jsonInfo.books[i].image;
+            	booksInfo += "<img src="+imageURL+" />"+"<br><br><br>";
+	     	}
+			
+	        $("#output").html(memberInfo+"<br>"+booksInfo));
+	       },
+	      error:function(data,textStatus){
+	         alert("에러가 발생했습니다.");ㅣ
+	      },
+	      complete:function(data,textStatus){
+	      }
+	   }); 
+       });
+    });
+ </script>
 ```
