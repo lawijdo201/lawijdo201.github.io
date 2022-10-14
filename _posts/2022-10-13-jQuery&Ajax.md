@@ -129,6 +129,7 @@ $.ajax({
     }
 });    
 ```
+
 클라이언트
 ----------
 
@@ -193,6 +194,7 @@ public class AjaxTest1 extends HttpServlet {
 	}
 }
 ```
+
 Ajax 이용해 서버와 JSON 데이터 주고받기
 ==============================
 
@@ -255,6 +257,9 @@ private void doHandle(HttpServletRequest request, HttpServletResponse response) 
 	2. membersArray의 JSONArray 객체를 생성한 후 회원 정보를 저장한 JSON 객체를 차례대로 저장
 	3. membersArray배열에 회원 정보를 저장한 후 totalObject로 JSONObject 객체를 생성하여 name에는 자바스크립트에서 접근할 때 사용하는 이름인 members를, value에는 membersArray를 최종적으로 저장
 
+서버
+---------
+
 ```java
 private void doHandle(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
@@ -311,6 +316,8 @@ private void doHandle(HttpServletRequest request, HttpServletResponse response)
 	writer.print(jsonInfo);					/저브라우저로 전송
 }
 ```
+웹브라우저
+----------
 
 ```javascript
  <script>
